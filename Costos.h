@@ -77,8 +77,6 @@ float Costos::costoAguaCasa(Casa &c){
 float Costos::costoEnergiaCasa(Casa &c){
     c.gastoEnergia();
     costoEnergiaCasaC = c.gEnergia*costoKWh;
-    return costoEnergiaCasaC;
-    
-    
-}
+    return costoEnergiaCasaC;}
+
 #endif /* Costos_h */
