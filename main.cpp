@@ -47,7 +47,7 @@ int main(){
     cout << "\n" << "Este es el gasto del agua de la casa "<< CasaEstilo1.gastoAguaCasa();
     
     //Herencia de casa, caso de prueba para clase fraccionamiento
-    Fraccionamiento Zibata(CasaEstilo1,10, true);
+    Fraccionamiento Zibata(CasaEstilo1, true);
     cout <<"\n" <<"Este es el gasto del agua del fraccionamiento"<< Zibata.gastoAguaFracc(CasaEstilo1);
     
     //Herencias de construcción, caso de prueba para clase edificio

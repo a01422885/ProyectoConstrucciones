@@ -152,33 +152,40 @@ class Fraccionamiento {
         int nCasas;
         bool golf;
         Casa listaCasas[200];
+        int tLista;
     public:
         Fraccionamiento();
-        Fraccionamiento(Casa,int, bool);
+        Fraccionamiento(Casa,bool);
         void agrega_casa(Casa);
         float gastoAguaFracc(Casa c);
         float gastoAguaFraccT;
         float gastoEnergiaFracc(Casa c);
         float gastoEnergiaFraccT;
-        void setNCasas(int);
         int getNCasas();
+    
 };
 
 Fraccionamiento::Fraccionamiento(){
     Casa c(0,0,0,0,false);
     nCasas = 0;
     golf = false;
+    tLista = 0;
 }
 
-Fraccionamiento::Fraccionamiento(Casa _c,int _nCasas, bool _golf){
+Fraccionamiento::Fraccionamiento(Casa _c, bool _golf){
     c = _c;
-    nCasas = _nCasas;
+    //nCasas = _nCasas;
     golf = _golf;
+}
+
+void Fraccionamiento::agrega_casa(Casa c){
+    listaCasas[tLista] = c;
+    tLista++;
 }
 
 float Fraccionamiento::gastoAguaFracc(Casa c){
     c.gastoAguaCasa();
-    gastoAguaFraccT = c.gastoAguaCasaT*nCasas;
+    gastoAguaFraccT = c.gastoAguaCasaT*tLista;
     if(golf == true){
         gastoAguaFraccT = gastoAguaFraccT + (gastoAguaFraccT*207.7);
     }else{
@@ -197,9 +204,8 @@ float Fraccionamiento::gastoEnergiaFracc(Casa c){
     }
     return gastoEnergiaFraccT;}
 
-void Fraccionamiento::setNCasas(int _nCasas){ nCasas = _nCasas;}
 
-int Fraccionamiento:: getNCasas() { return nCasas;}
+int Fraccionamiento::getNCasas() { return tLista;}
     
 
 
