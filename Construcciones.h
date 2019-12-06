@@ -83,15 +83,18 @@ float Construcciones::toneladas(){
     return ton;
 }
 
-//Herencia de clase contrucciones
+//No ocuparé setters porque no me interesa que los usuarios modifiquen los atributos. soo que tengan acceso a conocerlos
 class Edificios: public Construcciones{
-    private:
+    protected:
         int nPisos;
         int banos;
     public:
         Edificios (float, float, float, float, int, int);
+        int getBanos();
+        int getNPisos();
         float gastoAguaEdi();
         float AguaEdi;
+        
 };
 
 
@@ -100,11 +103,22 @@ Edificios::Edificios (float _h, float _area, float _ocupacion, float _dias, int 
     banos = _banos;
 }
 
+int Edificios::getBanos(){
+  return banos;
+}
+
+int Edificios::getNPisos(){
+  return banos;
+}
+
+
 float Edificios::gastoAguaEdi(){
     gastoAgua();
     AguaEdi = gAgua + (gAgua*nPisos*0.12) + (gAgua*banos*0.24) ;
     return AguaEdi;
 }
+
+
 
 //**************************
 /*Constructor hijo( variable_padre, variable_hijo) : padre (variable_padre SIN TIPO DE VARIABLE) //obvio tipo de variable también y suponiendo que quieres ocupar dos variables
@@ -117,7 +131,7 @@ float Edificios::gastoAguaEdi(){
 //Se está indicando que "Casa" será una herencia de "Construcciones".
 class Casa: public Construcciones {
     //no necesito declarar las variables de arriba, solo las variables de los valores que devolveré
-    private:
+    protected:
         bool jardin;
     public:
         Casa ();
@@ -148,12 +162,12 @@ float Casa::gastoAguaCasa(){
 //La clase Fraccionamiento estará compuesta por objetos de la clase Casa
 class Fraccionamiento {
     protected:
-        Casa c; //estoy declarando que los objetos de la clase Casa seran componentes de fraccionamiento
-        int nCasas;
+      
         bool golf;
         Casa listaCasas[200];
         int tLista;
     public:
+        Casa c;
         Fraccionamiento();
         Fraccionamiento(Casa,bool);
         void agrega_casa(Casa);
@@ -161,13 +175,11 @@ class Fraccionamiento {
         float gastoAguaFraccT;
         float gastoEnergiaFracc(Casa c);
         float gastoEnergiaFraccT;
-        int getNCasas();
+        int getTLista();
     
 };
 
 Fraccionamiento::Fraccionamiento(){
-    Casa c(0,0,0,0,false);
-    nCasas = 0;
     golf = false;
     tLista = 0;
 }
@@ -196,7 +208,7 @@ float Fraccionamiento::gastoAguaFracc(Casa c){
 
 float Fraccionamiento::gastoEnergiaFracc(Casa c){
     c.gastoEnergia();
-    gastoEnergiaFraccT = c.gEnergia*nCasas;
+    gastoEnergiaFraccT = c.gEnergia*tLista;
     if(golf == true){
         gastoEnergiaFraccT = gastoEnergiaFraccT + (gastoEnergiaFraccT*188.67);
     }else{
@@ -205,7 +217,8 @@ float Fraccionamiento::gastoEnergiaFracc(Casa c){
     return gastoEnergiaFraccT;}
 
 
-int Fraccionamiento::getNCasas() { return tLista;}
+int Fraccionamiento::getTLista() { return tLista;}
+
     
 
 
